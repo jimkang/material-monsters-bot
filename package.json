@@ -1,0 +1,28 @@
+{
+  "name": "material-monsters-bot",
+  "version": "1.0.0",
+  "description": "A bot that combines materials (like microfiber) and monsters (like owlbears).",
+  "main": "post-material-monster.js",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:jimkang/material-monsters-bot.git"
+  },
+  "keywords": [],
+  "author": "Jim Kang",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jimkang/material-monsters-bot/issues"
+  },
+  "homepage": "https://github.com/jimkang/material-monsters-bot",
+  "devDependencies": {
+    "tape": "^3.0.3"
+  },
+  "dependencies": {
+    "conform-async": "^1.1.1",
+    "jsonfile": "^2.0.0",
+    "material-monsters": "^1.0.2",
+    "probable": "^1.4.0",
+    "seedrandom": "^2.3.11",
+    "twit": "^1.1.20"
+  }
+}
