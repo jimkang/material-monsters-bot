@@ -5,6 +5,8 @@ var createProbable = require('probable').createProbable;
 var seedrandom = require('seedrandom');
 var Twit = require('twit');
 
+var twit = new Twit(config.twitter);
+
 var dryRun = false;
 if (process.argv.length > 2) {
   dryRun = (process.argv[2].toLowerCase() == '--dry');
@@ -17,11 +19,17 @@ var namer = createMonsterNamer({
   random: seedrandom(seed)
 });
 
-var namePackage = namer.nameMonster()
+namer.nameMonster(postName)
 
-console.log(namePackage);
-
-var twit = new Twit(config.twitter);
+function postName(error, namePackage) {
+  if (error) {
+    console.log(error);
+  }
+  else {
+    console.log(namePackage);
+    postTweet(namePackage.name);
+  }
+}
 
 function postTweet(text) {
   if (dryRun) {
@@ -45,5 +53,3 @@ function postTweet(text) {
     );
   }
 }
-
-postTweet(namePackage.name);
