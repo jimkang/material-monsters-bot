@@ -20,7 +20,7 @@
   "dependencies": {
     "conform-async": "^1.1.1",
     "jsonfile": "^2.0.0",
-    "material-monsters": "^2.0.0",
+    "material-monsters": "^2.1.0",
     "probable": "^1.4.0",
     "seedrandom": "^2.3.11",
     "twit": "^1.1.20"
