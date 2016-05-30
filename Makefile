@@ -1,15 +1,16 @@
 HOMEDIR = $(shell pwd)
-GITDIR = /var/repos/material-monsters-bot.git
+USER = bot
+SERVER = smidgeo
+SSHCMD = ssh $(USER)@$(SERVER)
+PROJECTNAME = material-monsters-bot
+APPDIR = /opt/$(PROJECTNAME)
+
+pushall: sync
+	git push origin master
+
+sync:
+	rsync -a $(HOMEDIR) $(USER)@$(SERVER):/opt --exclude node_modules/
+	$(SSHCMD) "cd $(APPDIR) && npm install"
 
 run:
 	node post-material-monster.js
-
-sync-worktree-to-git:
-	git --work-tree=$(HOMEDIR) --git-dir=$(GITDIR) checkout -f
-
-npm-install:
-	cd $(HOMEDIR)
-	npm install
-	npm prune
-
-post-receive: sync-worktree-to-git npm-install
