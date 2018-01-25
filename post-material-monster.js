@@ -1,7 +1,7 @@
+/* global process */
+
 var config = require('./config');
 var createMonsterNamer = require('material-monsters');
-var callBackOnNextTick = require('conform-async');
-var createProbable = require('probable').createProbable;
 var seedrandom = require('seedrandom');
 var Twit = require('twit');
 
@@ -9,23 +9,22 @@ var twit = new Twit(config.twitter);
 
 var dryRun = false;
 if (process.argv.length > 2) {
-  dryRun = (process.argv[2].toLowerCase() == '--dry');
+  dryRun = process.argv[2].toLowerCase() == '--dry';
 }
 
-var seed = (new Date()).toISOString();
+var seed = new Date().toISOString();
 console.log('seed:', seed);
 
 var namer = createMonsterNamer({
   random: seedrandom(seed)
 });
 
-namer.nameMonster(postName)
+namer.nameMonster(postName);
 
 function postName(error, namePackage) {
   if (error) {
     console.log(error);
-  }
-  else {
+  } else {
     console.log(namePackage);
     postTweet(namePackage.name);
   }
@@ -34,19 +33,17 @@ function postName(error, namePackage) {
 function postTweet(text) {
   if (dryRun) {
     console.log('Would have tweeted:', text);
-  }
-  else {
+  } else {
     twit.post(
       'statuses/update',
       {
         status: text
       },
-      function tweetDone(error, data, response) {
+      function tweetDone(error, data) {
         if (error) {
           console.log(error);
           console.log('data:', data);
-        }
-        else {
+        } else {
           console.log('Posted to Twitter:', text);
         }
       }

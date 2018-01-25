@@ -14,3 +14,6 @@ sync:
 
 run:
 	node post-material-monster.js
+
+prettier:
+	prettier --single-quote --write "**/*.js"
